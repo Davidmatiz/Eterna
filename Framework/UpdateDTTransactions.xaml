@@ -1,0 +1,360 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="UpdateDTTransactions" this:UpdateDTTransactions.in_EntIndexRow="2" this:UpdateDTTransactions.in_AlfEstadoTransaccion="Finalizada"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:this="clr-namespace:"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_AlfRutaArchivoTransacciones" Type="InArgument(x:String)" />
+    <x:Property Name="in_EntIndexRow" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_AlfEstadoTransaccion" Type="InArgument(x:String)" />
+    <x:Property Name="in_AlfIntentosTransaccion" Type="InArgument(x:String)" />
+    <x:Property Name="in_AlfErroresTransaccion" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>UpdateDTTransactions_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Description: Update the value of the column TransactionStatus, give them a new status and prevent that other bot use that line." DisplayName="UpdateDTTransactions" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
+    </Sequence.Variables>
+    <Sequence>
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="vStrComentariosExistente" />
+      </Sequence.Variables>
+      <ui:LogMessage DisplayName="Log Message" Level="Info" Message="[&quot;Estado transacción Numero: &quot;+in_EntIndexRow.ToString]" sap2010:WorkflowViewState.IdRef="LogMessage_2" />
+      <Sequence DisplayName="Actualizar Valores">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="vStrErroresExistente" />
+        </Sequence.Variables>
+        <ui:WriteCell Cell="[&quot;G&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Estado Transacción" SheetName="Transacciones" Text="[in_AlfEstadoTransaccion]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" sap2010:WorkflowViewState.IdRef="WriteCell_11" />
+        <ui:WriteCell Cell="[&quot;H&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Intentos Transacción" SheetName="Transacciones" Text="[in_AlfIntentosTransaccion]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" sap2010:WorkflowViewState.IdRef="WriteCell_12" />
+        <Sequence DisplayName="Actualiza Errores">
+          <ui:ReadCell Cell="[&quot;I&quot;+in_EntIndexRow.ToString]" DisplayName="Read Cell Errores Transacción" SheetName="Transacciones" WorkbookPath="[in_AlfRutaArchivoTransacciones]">
+            <ui:ReadCell.Result>
+              <OutArgument x:TypeArguments="x:String">[vStrErroresExistente]</OutArgument>
+            </ui:ReadCell.Result>
+            <sap2010:WorkflowViewState.IdRef>ReadCell_4</sap2010:WorkflowViewState.IdRef>
+          </ui:ReadCell>
+          <ui:WriteCell Cell="[&quot;I&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Errores Transacción" SheetName="Transacciones" Text="[If(String.IsNullOrEmpty(vStrErroresExistente),in_AlfErroresTransaccion,If(String.IsNullOrEmpty(in_AlfErroresTransaccion),vStrErroresExistente,vStrErroresExistente + vbCrLf + in_AlfErroresTransaccion))]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" sap2010:WorkflowViewState.IdRef="WriteCell_13" />
+          <sap2010:WorkflowViewState.IdRef>Sequence_9</sap2010:WorkflowViewState.IdRef>
+        </Sequence>
+        <sap2010:WorkflowViewState.IdRef>Sequence_10</sap2010:WorkflowViewState.IdRef>
+      </Sequence>
+      <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_AlfEstadoTransaccion]">
+        <Switch.Default>
+          <Sequence DisplayName="Sequence">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="s:DateTime" Name="vDatFin" />
+              <Variable x:TypeArguments="x:String" Name="vDatInicio" />
+              <Variable x:TypeArguments="x:TimeSpan" Name="vTimTiempo" />
+            </Sequence.Variables>
+            <Assign>
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:DateTime">[vDatFin]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:DateTime">[Now]</InArgument>
+              </Assign.Value>
+              <sap2010:WorkflowViewState.IdRef>Assign_3</sap2010:WorkflowViewState.IdRef>
+            </Assign>
+            <ui:WriteCell Cell="[&quot;F&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Hora Fin" SheetName="Transacciones" Text="[vDatFin.ToString]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" sap2010:WorkflowViewState.IdRef="WriteCell_14" />
+            <ui:ReadCell Cell="[&quot;E&quot;+in_EntIndexRow.ToString]" DisplayName="Read Cell Hora Inicio Transacción" SheetName="Transacciones" WorkbookPath="[in_AlfRutaArchivoTransacciones]">
+              <ui:ReadCell.Result>
+                <OutArgument x:TypeArguments="x:String">[vDatInicio]</OutArgument>
+              </ui:ReadCell.Result>
+              <sap2010:WorkflowViewState.IdRef>ReadCell_5</sap2010:WorkflowViewState.IdRef>
+            </ui:ReadCell>
+            <Assign>
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:TimeSpan">[vTimTiempo]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:TimeSpan">[vDatFin-DateTime.Parse(vDatInicio)]</InArgument>
+              </Assign.Value>
+              <sap2010:WorkflowViewState.IdRef>Assign_4</sap2010:WorkflowViewState.IdRef>
+            </Assign>
+            <ui:WriteCell Cell="[&quot;D&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Hora Fin" SheetName="Transacciones" Text="[vTimTiempo.ToString(&quot;c&quot;).Substring(0,8)]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" sap2010:WorkflowViewState.IdRef="WriteCell_15" />
+            <sap2010:WorkflowViewState.IdRef>Sequence_11</sap2010:WorkflowViewState.IdRef>
+          </Sequence>
+        </Switch.Default>
+        <Sequence x:Key="En Proceso">
+          <ui:WriteCell Cell="[&quot;E&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Hora Inicio" SheetName="Transacciones" Text="[Now.ToString]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" sap2010:WorkflowViewState.IdRef="WriteCell_16" />
+          <sap2010:WorkflowViewState.IdRef>Sequence_12</sap2010:WorkflowViewState.IdRef>
+        </Sequence>
+        <sap2010:WorkflowViewState.IdRef>Switch`1_2</sap2010:WorkflowViewState.IdRef>
+      </Switch>
+      <sap2010:WorkflowViewState.IdRef>Sequence_13</sap2010:WorkflowViewState.IdRef>
+    </Sequence>
+    <ui:CommentOut DisplayName="Comment Out">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities">
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="vStrComentariosExistente" />
+            </Sequence.Variables>
+            <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Estado transacción Numero: &quot;+in_EntIndexRow.ToString]" />
+            <Sequence DisplayName="Actualizar Valores" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="vStrErroresExistente" />
+              </Sequence.Variables>
+              <ui:WriteCell Cell="[&quot;G&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Estado Transacción" sap2010:WorkflowViewState.IdRef="WriteCell_1" SheetName="Transacciones" Text="[in_AlfEstadoTransaccion]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" />
+              <ui:WriteCell Cell="[&quot;H&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Intentos Transacción" sap2010:WorkflowViewState.IdRef="WriteCell_10" SheetName="Transacciones" Text="[in_AlfIntentosTransaccion]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" />
+              <Sequence DisplayName="Actualiza Errores" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <ui:ReadCell Cell="[&quot;I&quot;+in_EntIndexRow.ToString]" DisplayName="Read Cell Errores Transacción" sap2010:WorkflowViewState.IdRef="ReadCell_2" SheetName="Transacciones" WorkbookPath="[in_AlfRutaArchivoTransacciones]">
+                  <ui:ReadCell.Result>
+                    <OutArgument x:TypeArguments="x:String">[vStrErroresExistente]</OutArgument>
+                  </ui:ReadCell.Result>
+                </ui:ReadCell>
+                <ui:WriteCell Cell="[&quot;I&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Errores Transacción" sap2010:WorkflowViewState.IdRef="WriteCell_4" SheetName="Transacciones" Text="[If(String.IsNullOrEmpty(vStrErroresExistente),in_AlfErroresTransaccion,If(String.IsNullOrEmpty(in_AlfErroresTransaccion),vStrErroresExistente,vStrErroresExistente + vbCrLf + in_AlfErroresTransaccion))]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" />
+              </Sequence>
+            </Sequence>
+            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_AlfEstadoTransaccion]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+              <Switch.Default>
+                <Sequence DisplayName="Sequence" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="s:DateTime" Name="vDatFin" />
+                    <Variable x:TypeArguments="x:String" Name="vDatInicio" />
+                    <Variable x:TypeArguments="x:TimeSpan" Name="vTimTiempo" />
+                  </Sequence.Variables>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:DateTime">[vDatFin]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:DateTime">[Now]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:WriteCell Cell="[&quot;F&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Hora Fin" sap2010:WorkflowViewState.IdRef="WriteCell_8" SheetName="Transacciones" Text="[vDatFin.ToString]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" />
+                  <ui:ReadCell Cell="[&quot;E&quot;+in_EntIndexRow.ToString]" DisplayName="Read Cell Hora Inicio Transacción" sap2010:WorkflowViewState.IdRef="ReadCell_3" SheetName="Transacciones" WorkbookPath="[in_AlfRutaArchivoTransacciones]">
+                    <ui:ReadCell.Result>
+                      <OutArgument x:TypeArguments="x:String">[vDatInicio]</OutArgument>
+                    </ui:ReadCell.Result>
+                  </ui:ReadCell>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:TimeSpan">[vTimTiempo]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:TimeSpan">[vDatFin-DateTime.Parse(vDatInicio)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:WriteCell Cell="[&quot;D&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Hora Fin" sap2010:WorkflowViewState.IdRef="WriteCell_9" SheetName="Transacciones" Text="[vTimTiempo.ToString(&quot;c&quot;).Substring(0,8)]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" />
+                </Sequence>
+              </Switch.Default>
+              <Sequence x:Key="En Proceso" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <ui:WriteCell Cell="[&quot;E&quot;+in_EntIndexRow.ToString]" DisplayName="Write Cell Hora Inicio" sap2010:WorkflowViewState.IdRef="WriteCell_5" SheetName="Transacciones" Text="[Now.ToString]" WorkbookPath="[in_AlfRutaArchivoTransacciones]" />
+              </Sequence>
+            </Switch>
+          </Sequence>
+          <sap2010:WorkflowViewState.IdRef>Sequence_14</sap2010:WorkflowViewState.IdRef>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap2010:WorkflowViewState.IdRef>CommentOut_1</sap2010:WorkflowViewState.IdRef>
+    </ui:CommentOut>
+    <sads:DebugSymbol.Symbol>d1NDOlxVc2Vyc1xWQUxFUklcRG9jdW1lbnRzXFVpUGF0aFxQcm95ZWN0b1ZhbGVyaVxGcmFtZXdvcmtcVXBkYXRlRFRUcmFuc2FjdGlvbnMueGFtbDsBqQEBtAEBAwFzAXUBAkwD1wEOAgEBUAWTARACAQOUAQXVARUCAQJUB1S6AQIBUVUHZhICATBnB5EBEAIBBFRFVIgBAgFSWQlZjgICAUlaCVqSAgIBQVsJZBQCATFnSmdlAgEFjAEJjwEUAgEoaQuKARYCAQdZHFlFAgFPWZEBWawBAgFNWXxZiwECAUxZugFZ3AECAUpaHFpFAgFHWpMBWrABAgFFWn5ajQECAURavgFa4AECAUJcC2EZAgE5YgtiwgMCATKNAQuNAf4BAgEpbw13FgIBJHgNeIECAgEceQ1+GwIBFH8NhwEWAgEQiAENiAGiAgIBCFwdXEYCAT9eN15NAgE9XH1cjAECATxcmgFcvAECATpiHmJHAgE3YpQBYuACAgE2Yn9ijgECATVi7gJikAMCATONAR6NAUcCAS6NAYwBjQGcAQIBLY0Bd40BhgECASyNAaoBjQHMAQIBKnQ6dD8CASdxO3FEAgEleCB4SQIBIniLAXifAQIBIHh2eIUBAgEfeK0BeM8BAgEdeR95SAIBGns5e0UCARh5gwF5kgECARd5oAF5wgECARWEATqEAV4CAROBATuBAUcCARGIASCIAUkCAQ6IAYsBiAHAAQIBDIgBdogBhQECAQuIAc4BiAHwAQIBCQ==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="476,91" />
+      <sap2010:ViewStateData Id="WriteCell_11" sap:VirtualizedContainerService.HintSize="336,115" />
+      <sap2010:ViewStateData Id="WriteCell_12" sap:VirtualizedContainerService.HintSize="336,115" />
+      <sap2010:ViewStateData Id="ReadCell_4" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WriteCell_13" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="336,366">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="476,800">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="WriteCell_14" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="ReadCell_5" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="WriteCell_15" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,721">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteCell_16" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="336,239">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_2" sap:VirtualizedContainerService.HintSize="476,423">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="498,1518">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="476,91" />
+      <sap2010:ViewStateData Id="WriteCell_1" sap:VirtualizedContainerService.HintSize="336,115" />
+      <sap2010:ViewStateData Id="WriteCell_10" sap:VirtualizedContainerService.HintSize="336,115" />
+      <sap2010:ViewStateData Id="ReadCell_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WriteCell_4" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="336,366">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="476,800">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="WriteCell_8" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="ReadCell_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="WriteCell_9" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,721">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteCell_5" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,239">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,138">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="498,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="520,1775">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UpdateDTTransactions_1" sap:VirtualizedContainerService.HintSize="560,1855" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
