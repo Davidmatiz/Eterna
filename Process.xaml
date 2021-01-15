@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>758,701</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>848,701</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -224,7 +224,7 @@
               <av:Size x:Key="ShapeSize">200,66</av:Size>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="INGRESO A SAP " sap:VirtualizedContainerService.HintSize="1716,3308" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence DisplayName="INGRESO A SAP " sap:VirtualizedContainerService.HintSize="1716,3434" sap2010:WorkflowViewState.IdRef="Sequence_6">
             <Sequence.Variables>
               <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="vHmpConfig" />
               <Variable x:TypeArguments="s:Exception" Name="vExcErrorProcesarPeriodo" />
@@ -242,7 +242,8 @@
                 <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[in_HmpConfig]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke EscribirLogText workflow" sap:VirtualizedContainerService.HintSize="1674,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Logs\EscribirLogText.xaml">
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1674,91" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;iNICIO&quot;]" />
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke EscribirLogText workflow" sap:VirtualizedContainerService.HintSize="1674,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Logs\EscribirLogText.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="x:String" x:Key="in_AlfRutaArchivoLog">[Path.Combine(String.Format(vHmpConfig("ArchivoLogs").ToString,vHmpConfig("UserName").ToString),vHmpConfig("RutaGenerica").ToString)]</InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="in_TipoLog">I</InArgument>
@@ -255,15 +256,15 @@
                 <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="vHmpConfig">[vHmpConfig]</InArgument>
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
-            <If Condition="[in_HmpConfig(&quot;Resibos de caja&quot;).ToString.ToUpper.Equals(&quot;SI&quot;)]" DisplayName="recibos de caja " sap:VirtualizedContainerService.HintSize="1674,2963" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[in_HmpConfig(&quot;Resibos de caja&quot;).ToString.ToUpper.Equals(&quot;SI&quot;)]" DisplayName="recibos de caja " sap:VirtualizedContainerService.HintSize="1674,2959" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="1211,2813" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                <Sequence sap:VirtualizedContainerService.HintSize="1211,2811" sap2010:WorkflowViewState.IdRef="Sequence_24">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="1169,2588" sap2010:WorkflowViewState.IdRef="RetryScope_3">
+                  <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="1169,2586" sap2010:WorkflowViewState.IdRef="RetryScope_3">
                     <ui:RetryScope.ActivityBody>
                       <ActivityAction>
                         <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="1127,2412" sap2010:WorkflowViewState.IdRef="Sequence_23">
@@ -373,33 +374,15 @@
                                                 <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="799,93" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Info" Message="[&quot;Finalizando el proceso y cerrando aplicaciones&quot;]" />
                                                 <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke EscribirLogText workflow" sap:VirtualizedContainerService.HintSize="799,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_27" UnSafe="False" WorkflowFileName="Logs\EscribirLogText.xaml">
                                                   <ui:InvokeWorkflowFile.Arguments>
-                                                    <InArgument x:TypeArguments="x:String" x:Key="in_AlfRutaArchivoLog">
-                                                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Path.Combine(String.Format(vHmpConfig(&quot;ArchivoLogs&quot;).ToString,vHmpConfig(&quot;UserName&quot;).ToString),vHmpConfig(&quot;RutaGenerica&quot;).ToString)" />
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="x:String" x:Key="in_TipoLog">
-                                                      <Literal x:TypeArguments="x:String">I</Literal>
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="x:String" x:Key="in_NameBot">
-                                                      <Literal x:TypeArguments="x:String">Eterna</Literal>
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="x:String" x:Key="in_ProcessName">
-                                                      <Literal x:TypeArguments="x:String">Process</Literal>
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="x:String" x:Key="in_DescriptionLog">
-                                                      <Literal x:TypeArguments="x:String">Finalizando el proceso y cerrando aplicaciones</Literal>
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="x:Boolean" x:Key="in_BooNewLog">
-                                                      <Literal x:TypeArguments="x:Boolean" />
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_HmpConfig">
-                                                      <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="vHmpConfig" />
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="x:String" x:Key="in_AlfAplicacion">
-                                                      <Literal x:TypeArguments="x:String">SAP</Literal>
-                                                    </InArgument>
-                                                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="vHmpConfig">
-                                                      <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="vHmpConfig" />
-                                                    </InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="in_AlfRutaArchivoLog">[Path.Combine(String.Format(vHmpConfig("ArchivoLogs").ToString,vHmpConfig("UserName").ToString),vHmpConfig("RutaGenerica").ToString)]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="in_TipoLog">I</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="in_NameBot">Eterna</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="in_ProcessName">Process</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="in_DescriptionLog">Finalizando el proceso y cerrando aplicaciones</InArgument>
+                                                    <InArgument x:TypeArguments="x:Boolean" x:Key="in_BooNewLog">False</InArgument>
+                                                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_HmpConfig">[vHmpConfig]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="in_AlfAplicacion">SAP</InArgument>
+                                                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="vHmpConfig">[vHmpConfig]</InArgument>
                                                   </ui:InvokeWorkflowFile.Arguments>
                                                 </ui:InvokeWorkflowFile>
                                                 <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke KillAllProcesses workflow" sap:VirtualizedContainerService.HintSize="799,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_28" UnSafe="False" WorkflowFileName="Framework\KillAllProcesses.xaml">
